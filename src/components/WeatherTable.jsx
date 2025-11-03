@@ -8,7 +8,7 @@ export default function WeatherTable({ data, sortBy, toggleSort }) {
         <tr>
           {[
             ["time", "Time"],
-            ["city", "City"],
+            // ["city", "City"],
             ["temperature", "Temp"],
             ["rain", "Rain"],
             ["surface_pressure", "Pressure"],
@@ -34,8 +34,8 @@ export default function WeatherTable({ data, sortBy, toggleSort }) {
         ) : (
           data.map((row) => (
             <tr key={row.id}>
-              <td style={{ border: "1px solid #ccc", padding: "4px 8px" }}>{row._time.toLocaleString()}</td>
-              <td style={{ border: "1px solid #ccc", padding: "4px 8px" }}>{row.city}</td>
+              <td style={{ border: "1px solid #ccc", padding: "4px 8px" }}>{row.time.toLocaleString()}</td>
+              {/*<td style={{ border: "1px solid #ccc", padding: "4px 8px" }}>{row.city}</td>*/}
               <td style={{ border: "1px solid #ccc", padding: "4px 8px" }}>{row.temperature} {row.temperature_unit}</td>
               <td style={{ border: "1px solid #ccc", padding: "4px 8px" }}>{row.rain} {row.rain_unit}</td>
               <td style={{ border: "1px solid #ccc", padding: "4px 8px" }}>{row.surface_pressure} {row.surface_pressure_unit}</td>

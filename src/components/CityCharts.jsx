@@ -6,13 +6,16 @@ export default function CityCharts({ dataByCity }) {
     <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
       {Object.entries(dataByCity).map(([city, items]) => {
         const sorted = items.slice().sort((a, b) => a._time - b._time);
-        const chartData = sorted.map(i => ({
-          timestamp: i._time.toISOString(),
-          temperature: i.temperature,
-          rain: i.rain,
-          surface_pressure: i.surface_pressure,
-          wind_speed: i.wind_speed,
-        }));
+        const chartData = sorted.map(i => {
+          const date = i._time || i.time;
+          return {
+            timestamp: new Date(date).toISOString(),
+            temperature: i.temperature,
+            rain: i.rain,
+            surface_pressure: i.surface_pressure,
+            wind_speed: i.wind_speed,
+          };
+        });
 
         return (
           <div key={city} style={{ border: "1px solid #ccc", padding: 20, borderRadius: 8 }}>

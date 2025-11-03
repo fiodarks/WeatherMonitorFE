@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { parseData } from "../utils/dateUtils";
+import { formatDateInput, parseData } from '../utils/dateUtils';
 
-export default function useFetchMeasurements(startDate, endDate, initialPage = 1, initialSize = 10) {
+export default function useFetchMeasurements(startDate, endDate, refreshKey = true, initialPage = 1, initialSize = 10) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -13,8 +13,8 @@ export default function useFetchMeasurements(startDate, endDate, initialPage = 1
     setError(null);
 
     const qs = new URLSearchParams({
-      start_date: startDate.toISOString(),
-      end_date: endDate.toISOString(),
+      start_date: formatDateInput(startDate),
+      end_date: formatDateInput(endDate),
       sort_by: "timestamp:asc",
     });
 
@@ -34,7 +34,7 @@ export default function useFetchMeasurements(startDate, endDate, initialPage = 1
     return () => {
       mounted = false;
     };
-  }, [startDate?.toISOString(), endDate?.toISOString()]);
+  }, [startDate, endDate, refreshKey]);
 
-  return { data, loading, error };
+  return { data, setData,  loading, error };
 }

@@ -1,15 +1,26 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { toWeekRangeNow, groupByCity } from '../utils/dateUtils';
+import { groupByCity } from '../utils/dateUtils';
 import useFetchMeasurements from '../hooks/useFetchMeasurements';
 import CityCharts from '../components/CityCharts';
 import TimeRangeControls from '../components/TimeRangeControls';
 import PagedWeatherTable from '../components/PagedWeatherTable';
+import AddMeasurementForm from './AddMeasurementForm.jsx';
+import RefreshButton from './RefreshButton.jsx';
 
 export default function WeatherDashboard() {
-  const { now, past } = useMemo(() => toWeekRangeNow(), []);
+  const { now, past } = useMemo(() => {
+    const now = new Date();
+    now.setHours(23, 59, 59, 999);
+    const past = new Date();
+    past.setDate(past.getDate() - 7);
+    past.setHours(0, 0, 0, 0);
+    return { now, past };
+  }, []);
+
   const [start, setStart] = useState(past);
   const [end, setEnd] = useState(now);
-  const { data, loading, error } = useFetchMeasurements(start, end);
+  const [refreshKey, setRefreshKey] = useState(true);
+  const { data, setData, loading, error } = useFetchMeasurements(start, end, refreshKey);
   const [pageNum, setPageNum] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [totalItems, setTotalItems] = useState(1);
@@ -25,7 +36,7 @@ export default function WeatherDashboard() {
     if (pageNum > maxPages) setPageNum(maxPages);
   }, [pageNum, pageSize, totalPages]);
 
-  const [sortBy, setSortBy] = useState({ key: '_time', dir: 'asc' });
+  const [sortBy, setSortBy] = useState({ key: '_time', dir: 'desc' });
 
   const sortedData = useMemo(() => {
     const arr = data.slice();
@@ -42,13 +53,17 @@ export default function WeatherDashboard() {
     });
     setTotalItems(arr.length);
     return arr;
-  }, [data, sortBy]);
+  }, [data, sortBy, start, end]);
 
   const paginated = useMemo(() => {
     const startIdx = (pageNum - 1) * pageSize;
     const endIdx = startIdx + pageSize;
     return sortedData.slice(startIdx, endIdx);
   }, [sortedData, pageNum, pageSize]);
+
+  const handleAddMeasurement = newItem => {
+    setRefreshKey(k => !k);
+  };
 
   const cities = useMemo(() => groupByCity(data), [data]);
 
@@ -64,7 +79,9 @@ export default function WeatherDashboard() {
       <h1>Weather Dashboard</h1>
 
       <CityCharts dataByCity={cities} />
+      <AddMeasurementForm onAdd={handleAddMeasurement} />
       <TimeRangeControls start={start} end={end} setStart={setStart} setEnd={setEnd} loading={loading} error={error} />
+      <RefreshButton onRefresh={handleAddMeasurement}/>
       <PagedWeatherTable
         data={paginated}
         sortBy={sortBy}

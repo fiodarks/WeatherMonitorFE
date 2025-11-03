@@ -1,19 +1,18 @@
 // utils/dateUtils.js
-export function formatISOToLocalInput(dt) {
-  const d = new Date(dt);
-  const pad = (n) => String(n).padStart(2, "0");
-  const YYYY = d.getFullYear();
-  const MM = pad(d.getMonth() + 1);
-  const DD = pad(d.getDate());
-  const hh = pad(d.getHours());
-  const mm = pad(d.getMinutes());
-  return `${YYYY}-${MM}-${DD}T${hh}:${mm}`;
-}
+export const formatDateInput = (date) => {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
 
 export function toWeekRangeNow() {
   const now = new Date();
   const past = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-  return { now, past };
+  const nowStr = now.toISOString().split('T')[0]
+  const pastStr = past.toISOString().split('T')[0]
+  return { nowStr, pastStr };
 }
 
 export function parseData(items = []) {
