@@ -18,7 +18,7 @@ export default function useFetchMeasurements(startDate, endDate, refreshKey = tr
       sort_by: "timestamp:asc",
     });
 
-    fetch(`https://weathermonitorbe.onrender.com/api/weather/measurements/chart-data?${qs.toString()}`)
+    fetch(`https://limited-joleen-fiodarks-5b0af2c2.koyeb.app/api/weather/measurements/chart-data?${qs.toString()}`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();

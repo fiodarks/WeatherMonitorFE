@@ -6,7 +6,7 @@ export default function RefreshButton({ onRefresh }) {
 
   const handleRefresh = async () => {
     try {
-      const response = await fetch('https://weathermonitorbe.onrender.com/api/weather/measurements?city=Warsaw');
+      const response = await fetch('https://limited-joleen-fiodarks-5b0af2c2.koyeb.app/api/weather/measurements?city=Warsaw');
       if (response.status === 200) {
         const data = await response.json(); // fetch requires parsing JSON
         setModal(

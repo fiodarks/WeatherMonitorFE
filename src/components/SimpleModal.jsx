@@ -1,27 +1,61 @@
 import React from 'react';
 
 export default function SimpleModal({ title, content, onClose }) {
-  return (
-    <div style={{
+  const styles = {
+    overlay: {
       position: 'fixed',
-      top: 0, left: 0,
-      width: '100%', height: '100%',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
       background: 'rgba(0,0,0,0.3)',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       zIndex: 1000,
-    }}>
-      <div style={{
-        background: 'lightgray',
-        color: 'black',
-        padding: '20px',
-        borderRadius: '8px',
-        minWidth: '300px',
-      }}>
-        <h3>{title}</h3>
-        <div>{content}</div>
-        <button onClick={onClose} style={{ marginTop: '10px', cursor: 'pointer' }}>OK</button>
+    },
+    modal: {
+      background: 'lightgray',
+      color: 'black',
+      padding: '20px',
+      borderRadius: '8px',
+      minWidth: '300px',
+      maxWidth: '80vw',
+      maxHeight: '80vh',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    title: {
+      marginBottom: '10px',
+    },
+    content: {
+      overflowX: 'auto',       // horizontal scroll
+      overflowY: 'auto',       // vertical scroll
+      whiteSpace: 'nowrap',
+      flexGrow: 1,
+      marginBottom: '10px',
+      border: '1px solid #aaa',
+      padding: '10px',
+      borderRadius: '4px',
+      background: 'white',
+    },
+    button: {
+      alignSelf: 'flex-end',
+      cursor: 'pointer',
+      padding: '6px 12px',
+      borderRadius: '4px',
+      border: 'none',
+      background: 'blue',
+      color: 'white',
+    },
+  };
+
+  return (
+    <div style={styles.overlay}>
+      <div style={styles.modal}>
+        <h3 style={styles.title}>{title}</h3>
+        <div style={styles.content}>{content}</div>
+        <button onClick={onClose} style={styles.button}>OK</button>
       </div>
     </div>
   );

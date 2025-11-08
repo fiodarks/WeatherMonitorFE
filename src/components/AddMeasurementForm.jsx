@@ -51,7 +51,7 @@ export default function AddMeasurementForm({ onAdd }) {
       }).toString();
 
       const res = await fetch(
-        `https://weathermonitorbe.onrender.com/api/weather/measurements?${params}`,
+        `https://limited-joleen-fiodarks-5b0af2c2.koyeb.app/api/weather/measurements?${params}`,
         { method: 'POST' }
       );
 
