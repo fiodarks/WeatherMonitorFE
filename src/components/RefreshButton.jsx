@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SimpleModal from './SimpleModal.jsx'; // your existing modal component
+import SimpleModal from './SimpleModal.jsx';
 
 export default function RefreshButton({ onRefresh }) {
   const [modal, setModal] = useState(null);
@@ -8,7 +8,7 @@ export default function RefreshButton({ onRefresh }) {
     try {
       const response = await fetch('https://limited-joleen-fiodarks-5b0af2c2.koyeb.app/api/weather/measurements?city=Warsaw');
       if (response.status === 200) {
-        const data = await response.json(); // fetch requires parsing JSON
+        const data = await response.json();
         setModal(
           <SimpleModal
             title="New Measurement"
@@ -32,7 +32,7 @@ export default function RefreshButton({ onRefresh }) {
             }
             onClose={() => {
               setModal(null);
-              onRefresh(); // re-fetch table data
+              onRefresh();
             }}
           />
         );

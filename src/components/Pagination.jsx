@@ -90,7 +90,7 @@ export function Pagination({ pageNum, setPageNum, pageSize, setPageSize, totalIt
         onChange={(e) => {
           const newSize = Number(e.target.value);
           setPageSize(newSize);
-          setPageNum(1); // reset to first page
+          setPageNum(1);
         }}
         style={{ marginLeft: '16px', padding: '6px', borderRadius: '4px', border: '1px solid #ccc' }}
       >

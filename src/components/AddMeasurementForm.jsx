@@ -22,7 +22,6 @@ export default function AddMeasurementForm({ onAdd }) {
 
   const isValidNumber = value => !isNaN(value) && value !== '';
 
-  // Button disabled if any field is not a valid number
   const canSubmit =
     isValidNumber(form.temperature) &&
     isValidNumber(form.rain) &&
@@ -57,11 +56,10 @@ export default function AddMeasurementForm({ onAdd }) {
 
       if (!res.ok) throw new Error(`Failed: ${res.status}`);
       const newMeasurement = await res.json();
-      if (!newMeasurement.time) newMeasurement.time = new Date().toISOString();
+      if (!newMeasurement.time) newMeasurement.time = new Date().toUTCString();
 
       onAdd(newMeasurement);
 
-      // Reset numeric fields
       setForm({
         temperature: '',
         is_day: true,

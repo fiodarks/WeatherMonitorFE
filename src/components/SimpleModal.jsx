@@ -29,8 +29,8 @@ export default function SimpleModal({ title, content, onClose }) {
       marginBottom: '10px',
     },
     content: {
-      overflowX: 'auto',       // horizontal scroll
-      overflowY: 'auto',       // vertical scroll
+      overflowX: 'auto',
+      overflowY: 'auto',
       whiteSpace: 'nowrap',
       flexGrow: 1,
       marginBottom: '10px',

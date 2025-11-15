@@ -1,4 +1,3 @@
-// utils/dateUtils.js
 export const formatDateInput = (date) => {
   const d = new Date(date);
   const year = d.getFullYear();
@@ -16,7 +15,13 @@ export function toWeekRangeNow() {
 }
 
 export function parseData(items = []) {
-  return items.map((it) => ({ ...it, _time: new Date(it.time) }));
+  return items.map((it) => {
+    const timeStr = it.time?.endsWith("Z") ? it.time : it.time + "Z";
+    return {
+      ...it,
+      time: new Date(timeStr)
+    };
+  });
 }
 
 export function groupByCity(data) {

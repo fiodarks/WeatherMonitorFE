@@ -2,14 +2,12 @@ import { formatDateInput } from '../utils/dateUtils.js';
 
 export default function TimeRangeControls({ start, end, setStart, setEnd, loading, error }) {
 
-  // ensure start at 00:00:00 local
   const handleStartChange = (e) => {
     const [year, month, day] = e.target.value.split("-").map(Number);
     const newDate = new Date(year, month - 1, day, 0, 0, 0, 0);
     setStart(newDate);
   };
 
-  // ensure end at 23:59:59 local
   const handleEndChange = (e) => {
     const [year, month, day] = e.target.value.split("-").map(Number);
     const newDate = new Date(year, month - 1, day, 23, 59, 59, 999);
