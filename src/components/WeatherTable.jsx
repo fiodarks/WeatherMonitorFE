@@ -15,9 +15,9 @@ export default function WeatherTable({ data, sortBy, toggleSort }) {
             ["wind_speed", "Wind"],
           ].map(([key, label]) => (
             <th style={{ border: "2px solid #ccc", padding: "4px 8px" }}
-                key={key} onClick={() => toggleSort(key === "time" ? "_time" : key)}>
+                key={key} onClick={() => toggleSort(key === "time" ? "time" : key)}>
               {label}{" "}
-              {sortBy.key === (key === "time" ? "_time" : key)
+              {sortBy.key === (key === "time" ? "time" : key)
                 ? sortBy.dir === "asc" ? "▲" : "▼"
                 : ""}
             </th>
