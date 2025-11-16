@@ -99,7 +99,7 @@ export default function AddMeasurementForm({ onAdd }) {
 
       <label style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
         <input type="checkbox" name="is_day" checked={form.is_day} onChange={handleChange} />
-        Day
+        Is a day
       </label>
 
       <input
