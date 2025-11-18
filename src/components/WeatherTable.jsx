@@ -19,7 +19,6 @@ export default function WeatherTable({
   const thStyle = {
     border: "1px solid #bbb",
     padding: "4px 8px",
-    background: "#f7f7f7",
     cursor: "pointer",
     fontWeight: "bold",
   };
@@ -84,8 +83,12 @@ export default function WeatherTable({
             </th>
           ))}
 
-          <th style={thStyle}>✏️</th>
-          <th style={thStyle}>🗑</th>
+          <th style={thStyle}>
+            <img src="/edit.svg" alt="Edit" width="16" height="16" />
+          </th>
+          <th style={thStyle}>
+            <img src="/delete.svg" alt="Delete" width="16" height="16" />
+          </th>
         </tr>
         </thead>
 
@@ -99,10 +102,8 @@ export default function WeatherTable({
         ) : (
           data.map((row) => {
             const isEditing = editId === row.id;
-
             return (
               <tr key={row.id}>
-                {/* Time */}
                 <td style={cellStyle}>
                   {isEditing ? (
                     <input
@@ -115,8 +116,6 @@ export default function WeatherTable({
                     row.time.toLocaleString()
                   )}
                 </td>
-
-                {/* Temp */}
                 <td style={cellStyle}>
                   {isEditing ? (
                     <input
@@ -131,8 +130,6 @@ export default function WeatherTable({
                     `${row.temperature} ${row.temperature_unit}`
                   )}
                 </td>
-
-                {/* Rain */}
                 <td style={cellStyle}>
                   {isEditing ? (
                     <input
@@ -147,8 +144,6 @@ export default function WeatherTable({
                     `${row.rain} ${row.rain_unit}`
                   )}
                 </td>
-
-                {/* Pressure */}
                 <td style={cellStyle}>
                   {isEditing ? (
                     <input
@@ -163,8 +158,6 @@ export default function WeatherTable({
                     `${row.surface_pressure} ${row.surface_pressure_unit}`
                   )}
                 </td>
-
-                {/* Wind */}
                 <td style={cellStyle}>
                   {isEditing ? (
                     <input
@@ -180,27 +173,27 @@ export default function WeatherTable({
                   )}
                 </td>
 
-                {/* Pencil / Save */}
                 <td style={cellStyle}>
                   {isEditing ? (
                     <>
-                      <button onClick={saveEdit} style={btnStyle}>💾</button>
-                      <button onClick={cancelEdit} style={btnStyle}>✖</button>
+                      <button onClick={saveEdit} style={btnStyle}>
+                        <img src="/save.svg" alt="Save" width="16" height="16" />
+                      </button>
+                      <button onClick={cancelEdit} style={btnStyle}>
+                        <img src="/stop.svg" alt="Cancel" width="16" height="16" />
+                      </button>
                     </>
                   ) : (
                     <button onClick={() => startEdit(row)} style={btnStyle}>
-                      ✏️
+                      <img src="/edit.svg" alt="Edit" width="16" height="16" />
                     </button>
                   )}
                 </td>
-
-                {/* Bin */}
                 <td style={cellStyle}>
                   <button
                     onClick={() => onDelete(row.id)}
-                    style={{ ...btnStyle, color: "red" }}
-                  >
-                    🗑
+                    style={{ ...btnStyle, color: "red" }}>
+                    <img src="/delete.svg" alt="Delete" width="16" height="16" />
                   </button>
                 </td>
               </tr>
