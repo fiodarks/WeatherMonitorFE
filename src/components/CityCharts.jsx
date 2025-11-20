@@ -20,7 +20,7 @@ export default function CityCharts({ dataByCity }) {
         return (
           <div key={city} style={{ border: "1px solid #ccc", padding: 20, borderRadius: 8 }}>
             <h2>{city}</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 16 }}>
+            <div className="chart-wrapper">
               <ChartTile title={`Temperature (${items[0]?.temperature_unit || "°C"})`} data={chartData} dataKey="temperature" />
               <ChartTile title={`Rain (${items[0]?.rain_unit || "mm"})`} data={chartData} dataKey="rain" />
               <ChartTile title={`Pressure (${items[0]?.surface_pressure_unit || "hPa"})`} data={chartData} dataKey="surface_pressure" />
